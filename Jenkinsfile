@@ -49,7 +49,7 @@ pipeline {
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'train-schedule-kube-canary.yml',
-                    #enableConfigSubstitution: true
+                    //enableConfigSubstitution: true
                 )
             }
         }
@@ -66,12 +66,12 @@ pipeline {
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'train-schedule-kube-canary.yml',
-                    #enableConfigSubstitution: true
+                    //enableConfigSubstitution: true
                 )
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'train-schedule-kube.yml',
-                    #enableConfigSubstitution: true
+                    //enableConfigSubstitution: true
                 )
             }
         }
