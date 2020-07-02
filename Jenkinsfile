@@ -51,7 +51,7 @@ pipeline {
                 //    configs: 'train-schedule-kube-canary.yml',
                 //    enableConfigSubstitution: true
                 //)
-                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'localhost']) {
+                kubeconfig([credentialsId: 'kubeconfig', serverUrl: 'localhost']) {
                     sh 'kubectl apply -f train-schedule-kube-canary.yml'
                 }
             }
