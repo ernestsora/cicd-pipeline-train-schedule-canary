@@ -27,7 +27,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             when {
-                branch 'example-solution'
+                branch 'master'
             }
             steps {
                 script {
@@ -40,7 +40,7 @@ pipeline {
         }
         stage('CanaryDeploy') {
             when {
-                branch 'example-solution'
+                branch 'master'
             }
             environment {
                 CANARY_REPLICAS = 1
@@ -49,7 +49,7 @@ pipeline {
                 //kubernetesDeploy(
                 //    kubeconfigId: 'kubeconfig',
                 //    configs: 'train-schedule-kube-canary.yml',
-                //    //enableConfigSubstitution: true
+                //    enableConfigSubstitution: true
                 //)
                 withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'localhost']) {
                     sh 'kubectl apply -f train-schedule-kube-canary.yml'
@@ -58,7 +58,7 @@ pipeline {
         }
         stage('DeployToProduction') {
             when {
-                branch 'example-solution'
+                branch 'master'
             }
             environment {
                 CANARY_REPLICAS = 0
@@ -69,12 +69,12 @@ pipeline {
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'train-schedule-kube-canary.yml',
-                    //enableConfigSubstitution: true
+                    enableConfigSubstitution: true
                 )
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
                     configs: 'train-schedule-kube.yml',
-                    //enableConfigSubstitution: true
+                    enableConfigSubstitution: true
                 )
             }
         }
