@@ -51,9 +51,10 @@ pipeline {
                 //    configs: 'train-schedule-kube-canary.yml',
                 //    enableConfigSubstitution: true
                 //)
-                withKubeConfig([credentialsId: 'kube_master', serverUrl: '172.31.19.185']) {
-                    sh 'kubectl apply -f train-schedule-kube-canary.yml'
-                }
+                //withKubeConfig([credentialsId: 'kube_master', serverUrl: '172.31.19.185']) {
+                //    sh 'kubectl apply -f train-schedule-kube-canary.yml'
+                //}
+                sh 'kubectl apply -f train-schedule-kube-canary.yml'
             }
         }
         stage('DeployToProduction') {
